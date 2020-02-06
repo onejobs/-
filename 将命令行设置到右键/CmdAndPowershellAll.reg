@@ -1,0 +1,19 @@
+Windows Registry Editor Version 5.00
+ 
+; 若原先有，先删除原来的
+[-HKEY_CLASSES_ROOT\Directory\Background\shell\OpenCmdHere]
+[-HKEY_CLASSES_ROOT\Directory\Background\shell\runas]
+[-HKEY_CLASSES_ROOT\Directory\Background\shell\PowershellAdmin]
+ 
+; 1.right key：Powershell
+[HKEY_CLASSES_ROOT\Directory\Background\shell\OpenCmdHere]
+@="Open Powershell"
+ 
+[HKEY_CLASSES_ROOT\Directory\Background\shell\OpenCmdHere\command]
+@="\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -noexit -command Set-Location -literalPath \"%V\""
+ 
+; 2.right key：Powershell(root)
+[HKEY_CLASSES_ROOT\Directory\Background\shell\PowershellAdmin]
+@="Open Powershell (root)"
+[HKEY_CLASSES_ROOT\Directory\Background\shell\PowershellAdmin\command]
+@="\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -windowstyle hidden -Command $stpath = pwd; Start-Process PowerShell -ArgumentList \\\"-NoExit\\\", \\\"-Command Set-Location -literalPath '%V'\\\" -verb RunAs"
